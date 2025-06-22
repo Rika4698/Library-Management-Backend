@@ -9,7 +9,7 @@ const bookRouter = Router();
 bookRouter.post("/", validateRequest(createBookZodSchema), CBook.createBook);
 bookRouter.get('/', CBook.getBooks);
 bookRouter.get('/:bookId', CBook.getBookById);
-bookRouter.patch('/:bookId', validateRequest(updateBookZodSchema), CBook.updateBookById);
+bookRouter.put('/:bookId', validateRequest(updateBookZodSchema), CBook.updateBookById);
 bookRouter.delete('/:bookId', CBook.deleteBook);
 
 
