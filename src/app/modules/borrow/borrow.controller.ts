@@ -4,7 +4,7 @@ import catchAsync from "../../../utils/catchAsync";
 
 
 
-
+//create borrow
 export const createBorrow = catchAsync( async (req: Request, res: Response, next: NextFunction) => {
     try {
         const row = req.body;
@@ -15,6 +15,20 @@ export const createBorrow = catchAsync( async (req: Request, res: Response, next
             data: borrow,
         });
     } catch (error) {
+        next(error);
+    }
+});
+
+// Borrow summary
+export const getBorrowSummary = catchAsync(async(req:Request, res:Response, next:NextFunction) =>{
+    try{
+        const summery = await borrowService.getBorrowSummary();
+        return res.status(201).json({
+            success:true,
+            message:"Borrowed books summary retrieved successfully",
+            data:summery,
+        });
+    }catch(error){
         next(error);
     }
 });
