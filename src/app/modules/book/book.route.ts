@@ -1,7 +1,7 @@
 import { Router } from "express";
 import * as CBook from './book.controller';
 import validateRequest from "../../../validation/validateRequest";
-import { createBookZodSchema } from "./book.validation";
+import { createBookZodSchema, updateBookZodSchema } from "./book.validation";
 
 
 const bookRouter = Router();
@@ -9,6 +9,8 @@ const bookRouter = Router();
 bookRouter.post("/", validateRequest(createBookZodSchema), CBook.createBook);
 bookRouter.get('/', CBook.getBooks);
 bookRouter.get('/:bookId', CBook.getBookById);
+bookRouter.patch('/:bookId',validateRequest(updateBookZodSchema), CBook.updateBookById );
+
 
 
 

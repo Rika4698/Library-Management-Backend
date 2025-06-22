@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import * as serviceBook from './book.service';
 import catchAsync from "../../../utils/catchAsync";
+import { LBook } from "./book.interface";
 
 
 
@@ -55,5 +56,32 @@ export const getBookById = catchAsync(async (req:Request, res:Response, next:Nex
         }
     }catch(error){
         next(error);
+    }
+});
+
+//Update book
+
+export const updateBookById = catchAsync(async(req:Request, res:Response, next:NextFunction) =>{
+    try{
+        const id = req.params.bookId;
+        const updated = req.body;
+        const book = await serviceBook.updateBookById(id, updated);
+         if(book){
+            return res.status(201).json({
+            success:true,
+            message:'Book updated successfully',
+            data:book,
+        });
+        }else{
+            return res.status(404).json({
+                success:false,
+                message:"Book not found",
+                data:null,
+            });
+        }
+
+    } catch(error){
+        next(error);
+
     }
 });
