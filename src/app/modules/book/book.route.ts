@@ -4,7 +4,7 @@ import * as CBook from './book.controller';
 
 const bookRouter = Router();
 
-bookRouter.post("/",CBook.createBook);
+bookRouter.post("/", CBook.createBook);
 
 
 
