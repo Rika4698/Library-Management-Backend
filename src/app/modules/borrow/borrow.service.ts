@@ -11,13 +11,16 @@ export const createBorrow = async (payload: LBorrow) => {
     if (!bookId)
         throw new Error('Book not found');
 
+      //check enough copies
     if (bookId.copies < payload.quantity)
         throw new Error('Not enough copies available');
 
+    //Duduct copies 
     bookId.copies -= payload.quantity;
 
     await bookId.save();
-
+    
+    //Save borrow record
     const borrow = await BorrowModel.create(payload);
 
     return borrow;
@@ -50,7 +53,7 @@ export const getBorrowSummary = async () => {
                     title: '$bookDetails.title',
                     isbn: '$bookDetails.isbn',
                 },
-                
+
                 totalQuantity: 1,
             },
         },

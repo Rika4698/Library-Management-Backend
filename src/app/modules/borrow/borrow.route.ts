@@ -7,7 +7,7 @@ import * as CBorrow from './borrow.controller';
 
 const router = Router();
 
-router.post('/',validateRequest(createBorrowZodSchema), CBorrow.createBorrow);
-router.get('/',CBorrow.getBorrowSummary);
+router.post('/', validateRequest(createBorrowZodSchema), CBorrow.createBorrow);
+router.get('/', CBorrow.getBorrowSummary);
 
 export const borrowRoutes = router;

@@ -9,7 +9,7 @@ import { LBook } from "./book.interface";
 export const createBook = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {
         const book = await serviceBook.createBook(req.body);
-       return res.status(201).json({
+        return res.status(201).json({
             success: true,
             message: "Book created successfully",
             data: book,
@@ -23,64 +23,64 @@ export const createBook = catchAsync(async (req: Request, res: Response, next: N
 });
 
 //get all book
-export const getBooks = catchAsync( async (req: Request, res:Response, next:NextFunction ) =>{
-    try{
+export const getBooks = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    try {
         const book = await serviceBook.getBooks(req.query);
         return res.status(201).json({
-            success:true,
-            message:'Books retrieved successfully',
-            data:book,
+            success: true,
+            message: 'Books retrieved successfully',
+            data: book,
         });
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 });
 
 //get book by id
-export const getBookById = catchAsync(async (req:Request, res:Response, next:NextFunction) =>{
-    try{
+export const getBookById = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    try {
         const id = req.params.bookId;
         const book = await serviceBook.getBookById(id);
-        if(book){
+        if (book) {
             return res.status(201).json({
-            success:true,
-            message:'Books retrieved successfully',
-            data:book,
-        });
-        }else{
+                success: true,
+                message: 'Books retrieved successfully',
+                data: book,
+            });
+        } else {
             return res.status(404).json({
-                success:false,
-                message:"Book not found",
-                data:null,
+                success: false,
+                message: "Book not found",
+                data: null,
             });
         }
-    }catch(error){
+    } catch (error) {
         next(error);
     }
 });
 
 //Update book
 
-export const updateBookById = catchAsync(async(req:Request, res:Response, next:NextFunction) =>{
-    try{
+export const updateBookById = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    try {
         const id = req.params.bookId;
         const updated = req.body;
         const book = await serviceBook.updateBookById(id, updated);
-         if(book){
+        if (book) {
             return res.status(201).json({
-            success:true,
-            message:'Book updated successfully',
-            data:book,
-        });
-        }else{
+                success: true,
+                message: 'Book updated successfully',
+                data: book,
+            });
+        } else {
             return res.status(404).json({
-                success:false,
-                message:"Book not found",
-                data:null,
+                success: false,
+                message: "Book not found",
+                data: null,
             });
         }
 
-    } catch(error){
+    } catch (error) {
         next(error);
 
     }
@@ -88,24 +88,24 @@ export const updateBookById = catchAsync(async(req:Request, res:Response, next:N
 
 
 //delete book
-export const deleteBook = catchAsync(async(req:Request,res:Response, next:NextFunction) => {
-    try{
+export const deleteBook = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    try {
         const id = req.params.bookId
         const result = await serviceBook.deleteBook(id);
-         if(result){
+        if (result) {
             return res.status(201).json({
-            success:true,
-            message:'Book deleted successfully',
-            data:null,
-        });
-        }else{
+                success: true,
+                message: 'Book deleted successfully',
+                data: null,
+            });
+        } else {
             return res.status(404).json({
-                success:false,
-                message:"Book not found",
-                data:null,
+                success: false,
+                message: "Book not found",
+                data: null,
             });
         }
-    } catch(error){
+    } catch (error) {
         next(error);
     }
 });

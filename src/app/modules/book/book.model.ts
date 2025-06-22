@@ -44,9 +44,9 @@ const bookSchema = new Schema<LBook>({
 
 );
 
-bookSchema.pre('save', function(next){
+bookSchema.pre('save', function (next) {
     this.available = this.copies > 0;
     next();
 });
 
-export const BookModel = model<LBook>('Book',bookSchema);
+export const BookModel = model<LBook>('Book', bookSchema);
