@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import * as serviceBook from './book.service';
+import catchAsync from "../../../utils/catchAsync";
 
 
 
 //create Book
-export const createBook = async (req: Request, res: Response, next: NextFunction) => {
+export const createBook = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     try {
         const book = await serviceBook.createBook(req.body);
        return res.status(201).json({
@@ -18,10 +19,10 @@ export const createBook = async (req: Request, res: Response, next: NextFunction
         next(error);
 
     }
-};
+});
 
 //get all book
-export const getBooks = async (req: Request, res:Response, next:NextFunction ) =>{
+export const getBooks = catchAsync( async (req: Request, res:Response, next:NextFunction ) =>{
     try{
         const book = await serviceBook.getBooks(req.query);
         return res.status(201).json({
@@ -32,4 +33,27 @@ export const getBooks = async (req: Request, res:Response, next:NextFunction ) =
     }catch(err){
         next(err);
     }
-};
+});
+
+//get book by id
+export const getBookById = catchAsync(async (req:Request, res:Response, next:NextFunction) =>{
+    try{
+        const id = req.params.bookId;
+        const book = await serviceBook.getBookById(id);
+        if(book){
+            return res.status(201).json({
+            success:true,
+            message:'Books retrieved successfully',
+            data:book,
+        });
+        }else{
+            return res.status(404).json({
+                success:false,
+                message:"Book not found",
+                data:null,
+            });
+        }
+    }catch(error){
+        next(error);
+    }
+});

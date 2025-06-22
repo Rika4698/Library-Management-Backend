@@ -28,3 +28,9 @@ export const getBooks = async(filter:any) => {
 
     return await BookModel.find(query).sort(sortQuery).limit(limit);
 }
+
+
+//GET Book by ID
+export const getBookById = async(id:string) => {
+    return await BookModel.findById(id);
+}
