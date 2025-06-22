@@ -85,3 +85,27 @@ export const updateBookById = catchAsync(async(req:Request, res:Response, next:N
 
     }
 });
+
+
+//delete book
+export const deleteBook = catchAsync(async(req:Request,res:Response, next:NextFunction) => {
+    try{
+        const id = req.params.bookId
+        const result = await serviceBook.deleteBook(id);
+         if(result){
+            return res.status(201).json({
+            success:true,
+            message:'Book deleted successfully',
+            data:null,
+        });
+        }else{
+            return res.status(404).json({
+                success:false,
+                message:"Book not found",
+                data:null,
+            });
+        }
+    } catch(error){
+        next(error);
+    }
+});

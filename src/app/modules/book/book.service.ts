@@ -48,3 +48,9 @@ export const updateBookById = async (id: string, data:LBook) => {
         return { updated: false };
     }
 };
+
+//delete book
+export const deleteBook = async(id:string) => {
+    const result = await BookModel.findByIdAndDelete(id);
+    return result;
+}
